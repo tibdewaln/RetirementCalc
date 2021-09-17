@@ -1,0 +1,37 @@
+<app-titlebar></app-titlebar>
+<div class="text-center" style="margin-top:20px;">
+    <h2>Calculate Monthly investments for retirement savings</h2>
+</div>
+<div class="container">
+    <div class="col-md-10 center">
+        <form (ngSubmit)="calculateMonthlyInvestments()" #form="ngForm">
+            <fieldset>
+                <table class="table">
+                    <tr>
+                        <th>Rate of Interest During Accumulation:</th>
+                        <td><input type="number" class="form-control" placeholder="Rate of Interest"
+                             name="roi" [(ngModel)]="roi" required #rate="ngModel">
+                             <span class="help-block" *ngIf="rate.invalid && rate.touched">This field is required</span>
+                            </td>
+                    </tr>
+                    <tr>
+                        <th>Number of Years to Retire:</th>
+                        <td><input type="number" class="form-control" placeholder="Number of Years" [value]="noOfYrs" disabled></td>
+                    </tr>
+                    <tr>
+                        <th>Retirement Corpus Amount</th>
+                        <td><input type="number" class="form-control" placeholder="Retirement Corpus Amount" [value]="corpusAmount" disabled></td>
+                    </tr>
+                    <tr>
+                        <th>Monthly Investment:</th>
+                        <td><input type="number" class="form-control" placeholder="Rs. 0.00" [value]="monthlyInvestments" disabled></td>
+                    </tr>
+                </table>
+                <div class="text-center">
+                    <button class="btn btn-primary" type="submit" [disabled]="form.invalid">Calculate</button>
+                    <!-- <button class="btn btn-success" type="submit">Next</button> -->
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</div>

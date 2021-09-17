@@ -1,0 +1,48 @@
+<app-titlebar></app-titlebar>
+<div class="text-center" style="margin-top:20px;">
+    <h2>Calculate Retirement Corpus Amount</h2>
+</div>
+<div class="container">
+    <div class="col-md-10 center">
+        <form (ngSubmit)="calculateCorpus()" #form="ngForm">
+            <fieldset>
+                <table class="table">
+                    <tr>
+                        <th>Expense at Retirement:</th>
+                        <td><input type="number" class="form-control" [value]="expense" disabled></td>
+                    </tr>
+                    <tr>
+                        <th>Life Expectancy:</th>
+                        <td><input type="number" class="form-control"
+                            name="life" [(ngModel)]="lifeExpentency" (input)="onAgeChange()" required #life="ngModel">
+                            <span class="help-block" *ngIf="life.invalid && life.touched">This field is required</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Number of years after retirement</th>
+                        <td><input type="number" class="form-control" [value]="yrsOfRetire" disabled></td>
+                    </tr>
+                    <tr>
+                        <th>Rate of Return after Retirement:</th>
+                        <td><input type="number" class="form-control" placeholder="Rate of Return"
+                             name="return" [(ngModel)]="rateOfReturnAfterRetire" required #return="ngModel">
+                             <span class="help-block" *ngIf="return.invalid && return.touched">This field is required</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Inflation Adjusted Return</th>
+                        <td><input type="number" class="form-control" placeholder="Inflation Adjusted Return" [value]="inflationAdjustedReturn" disabled></td>
+                    </tr>
+                    <tr>
+                        <th>Retirement Corpus Amount:</th>
+                        <td><input type="number" class="form-control" [value]="corpusAmount" disabled></td>
+                    </tr>
+                </table>
+                <div class="text-center">
+                    <button class="btn btn-primary me-5" type="submit" [disabled]="form.invalid">Calculate</button>
+                    <button class="btn btn-success" [disabled]="form.invalid" [routerLink]="['/investment', noOfYrsToRetire, corpusAmount]">Next</button>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</div>

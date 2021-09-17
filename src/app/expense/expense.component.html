@@ -1,0 +1,58 @@
+<app-titlebar></app-titlebar>
+<div class="text-center" style="margin-top:20px;">
+    <h2>Calculate Expense at Retirement</h2>
+</div>
+<div class="container">
+    <div class="col-md-10 center">
+        <form (ngSubmit)="calculateExpense()" #form="ngForm">
+            <fieldset class="form-group">
+                <table class="table">
+                    <tr>
+                        <th>Monthly Expense(Rs):</th>
+                        <td><input type="number" class="form-control" name="monthly"
+                            [(ngModel)]="monthlyExpense" required (input)="onExpenseChange()" #monthly="ngModel">
+                            <span class="help-block" *ngIf="monthly.invalid && monthly.touched">This field is required</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Yearly Expense(Rs):</th>
+                        <td><input type="number" class="form-control" [value]="yearlyExpense" disabled></td>
+                    </tr>
+                    <tr>
+                        <th>Annual Inflation Rate:</th>
+                        <td><input type="number" class="form-control"
+                            name="rate" [(ngModel)]="inflationRate" required #rate="ngModel">
+                            <span class="help-block" *ngIf="rate.invalid && rate.touched">This field is required</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Current Age:</th>
+                        <td><input type="number" class="form-control" name="cage"
+                            [(ngModel)]="currentAge" (input)="onCurrentAgeChange()" required #cage="ngModel">
+                            <span class="help-block" *ngIf="cage.invalid && cage.touched">This field is required</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Expected Retirement Age:</th>
+                        <td><input type="number" class="form-control" name="eage"
+                            [(ngModel)]="retirement" (input)="onRetirementAgeChange()" required #eage="ngModel">
+                            <span class="help-block" *ngIf="eage.invalid && eage.touched">This field is required</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Years to Retirement:</th>
+                        <td><input type="number" class="form-control" placeholder="Years to Retirement" [value]="yrsOfRetirement" disabled></td>
+                    </tr>
+                    <tr>
+                        <th>Inflation Adjusted Annual Expense(Rs):</th>
+                        <td><input type="number" class="form-control" placeholder="Rs. 0.00" [value]="annualExpense" disabled></td>
+                    </tr>
+                </table>
+                <div class="text-center">
+                    <button class="btn btn-primary me-5" type="submit" [disabled]="form.invalid">Calculate</button>
+                    <button class="btn btn-success" [disabled]="form.invalid" [routerLink]="['/corpus', annualExpense, retirement, yrsOfRetirement, inflationRate]">Next</button>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</div>
